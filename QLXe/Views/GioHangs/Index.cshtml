@@ -1,0 +1,260 @@
+﻿<style>
+    /* Điều chỉnh kích thước của hình ảnh */
+    #cart img {
+        max-width: 80px; /* Điều chỉnh kích thước theo ý muốn */
+        max-height: 80px; /* Điều chỉnh kích thước theo ý muốn */
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* Định dạng cho các nút trong cột */
+    #cart .btn {
+        margin-right: 5px;
+    }
+
+    /* Định dạng cho các nút trong footer */
+    #cart tfoot .btn {
+        margin-top: 10px;
+    }
+
+    /* Định dạng cho tiêu đề của bảng */
+    #cart thead th {
+        text-align: center;
+        font-size: 20px; /* Kích thước chữ to lên */
+        font-weight: bold; /* Chữ in đậm */
+        padding-top: 20px; /* Tạo ra khoảng trống ở trên */
+    }
+
+    /* Định dạng cho các dòng dữ liệu trong bảng */
+    #cart tbody td {
+        text-align: center;
+        font-size: 18px; /* Kích thước chữ to lên */
+    }
+
+        /* Định dạng cho cột cuối cùng */
+        #cart tbody td:last-child {
+            text-align: center;
+        }
+
+    /* Định dạng cho footer */
+    #cart tfoot td {
+        text-align: center;
+    }
+
+    .btn-success {
+        border: 2px solid #00bfff; /* Màu và độ dày của khung */
+        background-color: #00bfff; /* Màu nền */
+        color: #fff; /* Màu chữ */
+        padding: 15px 30px;
+        font-size: 20px;
+    }
+
+    .quantity-input {
+        width: 10px; /* Điều chỉnh kích thước theo ý muốn */
+    }
+</style>
+
+@model IEnumerable<QLXe.Models.GioHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top: 20px;">
+    <!-- Tạo ra khoảng trống ở trên -->
+    <table id="cart" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th style="width:5%">Chọn</th>
+                <th style="width:30%">Tên sản phẩm</th>
+                <th style="width:15%">Giá bán</th>
+                <th style="width:15%">Giá sau khi giảm</th>
+                <th style="width:15%">Số lượng</th>
+                <th style="width:20%">Thành tiền</th>
+                <th style="width:20%">Hình ảnh</th>
+            </tr>
+        </thead>
+        @ViewBag.ID_KhachHang
+        <tbody>
+            @{
+                int p = 0;
+            }
+            @foreach (var item in Model)
+            {
+               
+                p++;
+                ViewBag.ID_KhachHang = item.ID_KhachHang;
+                <tr>
+                    <td>
+                        <!-- Thêm ô chọn cho mỗi sản phẩm -->
+                        <input type="checkbox" class="product-checkbox" data-idsp="@item.ID_SanPham" data-id="@item.ID" data-price="@item.SanPham.GiaBan*@item.SoLuong" checked>
+                    </td>
+                    <td>@item.SanPham.TenXe</td>
+                    <td>@item.SanPham.GiaBan.Value.ToString("N0") VNĐ</td>
+                    <td>@string.Format("{0:N0} VND", item.SanPham.GiaBan * (100 - item.SanPham.KhuyenMai.PhanTramGiamGia) / 100)</td>
+                    <td>
+                        <div class="input-group">
+                            <button class="btn-active btn-outline-secondary decrease" type="button" data-id="@item.ID">-</button>
+                            <input style="width: 20px" type="text" id="quantity-input-@item.ID" class="form-control quantity-input" value="@item.SoLuong" disabled>
+                            <button class="btn-active btn btn-outline-secondary increase" type="button" data-id="@item.ID">+</button>
+                        </div>
+                    </td>
+                    @{
+                        double? thanhTien = double.Parse(item.SanPham.GiaBan.ToString()) * (1- double.Parse(item.SanPham.KhuyenMai.PhanTramGiamGia.ToString())/100) * double.Parse(item.SoLuong.ToString());
+                    }
+                    <td class="thanh-tien">@thanhTien.Value.ToString("N0") VNĐ</td>
+                    @{
+                        var anhPhai = item.SanPham.HinhAnh.FirstOrDefault(h => h.ID_SanPham == item.ID_SanPham)?.AnhPhai;
+                        string ImagePath = "~/wwwroot/Images/" + anhPhai;
+                    }
+                    <td><img src="@Url.Content(ImagePath)" alt="@item.SanPham.TenXe" style="max-width: 100px; max-height: 100px;" /></td>
+                </tr>
+            }
+        </tbody>
+        @if (p != 0)
+        {
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="text-right">
+                        <strong>Tổng tiền: <span id="total">@Model.Sum(item => item.SanPham.GiaBan *(100 - item.SanPham.KhuyenMai.PhanTramGiamGia)/100 * item.SoLuong ?? 0).ToString("N0")</span> VNĐ</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <a href="@Url.Action("Index","SanPhams")" class="btn btn-warning">
+                            <i class="fa fa-angle-left"></i> Tiếp tục mua hàng
+                        </a>
+                    </td>
+                    <td colspan="2">
+                        <a href="#" class="btn btn-success btn-block" id="btnThanhToan2">
+                            Giao hàng tận nơi <i class="fa fa-angle-right"></i>
+                        </a>
+                    </td>
+                    <td colspan="2">
+                        <a href="#" class="btn btn-success btn-block" id="btnThanhToan">
+                            Lấy tại cửa hàng <i class="fa fa-angle-right"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tfoot>
+        }
+        @if (p == 0)
+        {
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <a href="@Url.Action("Index","SanPhams")" class="btn btn-warning">
+                            <i class="fa fa-angle-left"></i> Tiếp tục mua hàng
+                        </a>
+                    </td>
+                </tr>
+            </tfoot>
+        }
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Đảm bảo jQuery đã được bao gồm -->
+<script type="text/javascript">
+    function updateTotal() {
+        var total = 0;
+        // Lặp qua mỗi ô chọn
+        $('.product-checkbox').each(function () {
+            if ($(this).is(':checked')) { // Kiểm tra nếu ô chọn được chọn
+                // Lấy giá sản phẩm từ thuộc tính tùy chỉnh 'data-price' của ô chọn
+                var price = parseFloat($(this).data('price'));
+
+                // Tìm ô số lượng tương ứng và tính tổng tiền
+                var accountId = $(this).data('id');
+                var quantityInput = $('#quantity-input-' + accountId);
+                var quantity = parseInt(quantityInput.val());
+                total += (price * quantity);
+            }
+        });
+
+        // Cập nhật tổng tiền
+        $('#total').text(total.toLocaleString());
+    }
+    $(document).ready(function () {
+        $('.product-checkbox').change(function () {
+            updateTotal(); // Cập nhật tổng tiền mỗi khi ô chọn được thay đổi
+        });
+        $('.btn-active').click(function () {
+            var button = $(this);
+            var accountId = button.data('id');
+            var type = button.hasClass('increase') ? 'increase' : 'decrease'; // Kiểm tra nút là tăng hay giảm số lượng
+            var input = $('#quantity-input-' + accountId);
+            var currentQuantity = parseInt(input.val());
+
+            if (type === 'decrease') {
+                currentQuantity--;
+            } else if (type === 'increase') {
+                currentQuantity++;
+            } else {
+                return;
+            }
+
+            $.ajax({
+                url: '/GioHangs/Update/' + accountId,
+                type: 'POST',
+                data: { id: accountId, quantity: currentQuantity,type: type },
+                success: function (result) {
+                    if (result.success == true && result.removed == false) {
+                        input.val(currentQuantity);
+
+                        // Cập nhật thành tiền của sản phẩm
+                        var thanhTien = result.thanhTien.toLocaleString();
+                        var thanhTienCell = button.closest('tr').find('.thanh-tien');
+                        thanhTienCell.text(thanhTien + ' VNĐ');
+
+                        // Cập nhật tổng tiền
+                        var total = result.total.toLocaleString();
+                        $('#total').text(total);
+                    } else {
+                        if (result.success == true && result.removed == true) {
+                            var idKhachHang =  @ViewBag.ID_KhachHang;// Lấy giá trị ID_KhachHang từ Session
+                            window.location.href = '/GioHangs/Index?id=' + idKhachHang;
+                        } else
+                        alert(result.message);
+                    }
+                },
+                error: function () {
+                    alert('Đã xảy ra lỗi trong quá trình xử lý yêu cầu.');
+                }
+            });
+        });
+        $('#btnThanhToan').click(function () {
+            var idSanPhamArray = [];
+
+            // Lặp qua mỗi ô chọn
+            $('.product-checkbox').each(function () {
+                if ($(this).is(':checked')) { // Kiểm tra nếu ô chọn được chọn
+                    var idSanPham = $(this).data('idsp');
+                    idSanPhamArray.push(idSanPham);
+                }
+            });
+
+            // Tạo URL sử dụng Url.Action và truyền vào mảng các Id_SanPham
+            var url = '@Url.Action("Index2", "GioHangs")' + '?ids=' + idSanPhamArray.join(',');
+
+            // Chuyển hướng đến URL được tạo
+            window.location.href = url;
+        });
+        $('#btnThanhToan2').click(function () {
+            var idSanPhamArray = [];
+
+            // Lặp qua mỗi ô chọn
+            $('.product-checkbox').each(function () {
+                if ($(this).is(':checked')) { // Kiểm tra nếu ô chọn được chọn
+                    var idSanPham = $(this).data('idsp');
+                    idSanPhamArray.push(idSanPham);
+                }
+            });
+
+            // Tạo URL sử dụng Url.Action và truyền vào mảng các Id_SanPham
+            var url = '@Url.Action("Index3", "GioHangs")' + '?ids=' + idSanPhamArray.join(',');
+
+            // Chuyển hướng đến URL được tạo
+            window.location.href = url;
+        });
+    });
+</script>

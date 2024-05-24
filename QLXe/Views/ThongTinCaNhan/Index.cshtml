@@ -1,0 +1,274 @@
+﻿@model QLXe.Models.KhachHang
+<style>
+    .utB99K {
+        padding: 0 1.875rem 0.625rem;
+    }
+
+    body, html {
+        color: rgba(0, 0, 0, 0.8);
+        font-family: "Helvetica Neue", Helvetica, Arial, 文泉驛正黑, "WenQuanYi Zen Hei", "Hiragino Sans GB", "儷黑 Pro", "LiHei Pro", "Heiti TC", 微軟正黑體, "Microsoft JhengHei UI", "Microsoft JhengHei", sans-serif;
+        line-height: 1.2;
+    }
+
+    .SFztPl {
+        border-bottom: 0.0625rem solid #efefef;
+        padding: 1.125rem 0;
+    }
+
+    .BVrKV_ {
+        color: #333;
+        font-size: 1.125rem;
+        font-weight: 500;
+        line-height: 1.5rem;
+        margin: 0;
+        text-transform: capitalize;
+    }
+
+    h1 {
+        display: block;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+    }
+
+    .QcW5xy {
+        color: #555;
+        font-size: .875rem;
+        line-height: 1.0625rem;
+        margin-top: 0.1875rem;
+    }
+
+    .RCnc9v {
+        padding-top: 1.875rem;
+    }
+
+    .RCnc9v {
+        flex-direction: row;
+    }
+
+    .RCnc9v, .nv7bOz {
+        display: flex;
+    }
+
+    .RCnc9v {
+        align-items: flex-start;
+    }
+
+    .HrBg9Q {
+        flex: 1;
+        padding-right: 3.125rem;
+    }
+
+    div {
+        display: block;
+    }
+
+    form {
+        display: block;
+        margin-top: 0em;
+    }
+
+    .bQkdAY {
+        width: 602px;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    user agent stylesheet
+    table {
+        display: table;
+        box-sizing: border-box;
+        text-indent: initial;
+        border-color: grey;
+    }
+
+    .F4ruY9 {
+        padding-bottom: 54px;
+    }
+
+    .f1ZOv_ {
+        color: rgba(85,85,85,.8);
+        min-width: 20%;
+        overflow: hidden;
+        padding-bottom: 30px;
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    td, th {
+        padding: 0;
+    }
+
+    user agent stylesheet
+    td {
+        display: table-cell;
+        vertical-align: inherit;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .o6L4e0 {
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding-bottom: 30px;
+        padding-left: 20px;
+    }
+
+    .NGoa5Z {
+        align-items: center;
+        border: 1px solid rgba(0,0,0,.14);
+        border-radius: 2px;
+        box-shadow: inset 0 2px 0 rgb(0 0 0 / 2%);
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        display: flex;
+        height: 40px;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .kKnR04 {
+        background: none;
+        border: 0;
+        -webkit-filter: none;
+        filter: none;
+        flex: 1;
+        flex-shrink: 0;
+        outline: none;
+        padding: 12px;
+    }
+
+    .JQaxZl {
+        color: rgba(0,0,0,.4);
+    }
+
+    .JQaxZl, .yuF_j1 {
+        font-size: .875rem;
+        line-height: 1.25rem;
+        margin: 0;
+        padding: 4px 0 0;
+    }
+
+    .custom-editor {
+        border: none;
+        width: 100%;
+        box-sizing: border-box; /* Đảm bảo padding và border được bao gồm trong tổng chiều rộng */
+    }
+
+    /* Optional: Add some padding and background color for better appearance */
+    .custom-editor {
+        padding: 10px;
+        background-color: #f9f9f9; /* Màu nền nhạt để làm nổi bật input */
+    }
+</style>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="utB99K">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        <div class="SFztPl">
+            <h1 class="BVrKV_">Hồ sơ của tôi</h1>
+            <div class="QcW5xy">Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
+        </div>
+        <div class="RCnc9v">
+            <div class="HrBg9Q">
+                <table class="bQkdAY">
+                    <tr>
+                        <td class="f1ZOv_ F4ruY9">
+                            <label>Tên đăng nhập</label>
+                        </td>
+                        <td class="o6L4e0">
+                            <div>
+                                <div class="NGoa5Z">
+                                    <label type="text" placeholder="" class="kKnR04" value="">@Model.TaiKhoan.FirstOrDefault(s => s.ID_KhachHang == Model.ID).Username</label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="f1ZOv_">
+                            <label>Họ</label>
+                        </td>
+                        <td class="o6L4e0">
+                            <div>
+                                <div class="NGoa5Z">
+                                    @Html.EditorFor(model => model.Ho, new { htmlAttributes = new { @class = "form-control custom-editor" } })
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="f1ZOv_">
+                            <label>Tên</label>
+                        </td>
+                        <td class="o6L4e0">
+                            <div>
+                                <div class="NGoa5Z">
+                                    @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control custom-editor" } })
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="f1ZOv_">
+                            <label>Email</label>
+                        </td>
+                        <td class="o6L4e0">
+                            <div class="NGoa5Z">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control custom-editor" } })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="f1ZOv_">
+                            <label>Số điện thoại</label>
+                        </td>
+                        <td class="o6L4e0">
+                            <div class="NGoa5Z">
+                                @Html.EditorFor(model => model.DienThoai, new { htmlAttributes = new { @class = "form-control custom-editor" } })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="f1ZOv_">
+                            <label>Địa chỉ</label>
+                        </td>
+                        <td class="o6L4e0">
+                            <div class="NGoa5Z">
+                                @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control custom-editor" } })
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="f1ZOv_"></td>
+                        <td class="o6L4e0">
+                            <button type="submit" class="btn btn-solid-primary btn--m btn--inline">Lưu</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    @if (TempData["SuaTT"] != null)
+    {
+        <text>
+            alert("@Html.Raw(TempData["SuaTT"])");
+        </text>
+        // Reset ViewBag.TaoTaiKhoan để không hiển thị lại khi tải lại trang
+        TempData["SuaTT"] = null;
+    }
+</script>

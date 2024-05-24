@@ -1,0 +1,5 @@
+D:\DoAnTotNghiep\QLXe\common\obj\Debug\net5.0\common.csproj.AssemblyReference.cache
+D:\DoAnTotNghiep\QLXe\common\obj\Debug\net5.0\common.GeneratedMSBuildEditorConfig.editorconfig
+D:\DoAnTotNghiep\QLXe\common\obj\Debug\net5.0\common.AssemblyInfoInputs.cache
+D:\DoAnTotNghiep\QLXe\common\obj\Debug\net5.0\common.AssemblyInfo.cs
+D:\DoAnTotNghiep\QLXe\common\obj\Debug\net5.0\common.csproj.CoreCompileInputs.cache

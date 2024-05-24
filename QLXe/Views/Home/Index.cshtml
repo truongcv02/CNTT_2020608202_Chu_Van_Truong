@@ -1,0 +1,54 @@
+﻿@model IEnumerable<QLXe.Models.Slide>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section banner
+{
+    <div class="banner">
+        <div class="header-para" style="width: 35.5%">
+            <ul class="customcontent-top">
+                <li class="item  first_item">
+                    <div class="item_html">
+                        <a href="@Url.Action("index","TimKiem", new { khuyenMai = "30" })">
+                            <div class="banner1">
+                                <span class="text10">Khuyến mãi tới</span>
+                                <span class="text11">30%</span>
+                                <span class="link1">click here</span>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="item  last_item">
+                    <div class="item_html">
+                        <a href="@Url.Action("index","TimKiem", new { khuyenMai = "10" })">
+                            <div class="banner2">
+                                <span class="text13">Khuyến mãi tới</span>
+                                <span class="text14">10%</span>
+                                <span class="link1">click here</span>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="slider">
+            <div id="slideshow">
+                <ul class="slides">
+                    @foreach (var item in Model)
+                    {
+                        string ImagePath = "~/wwwroot/Images/" + item.Slide1 ?? "no_image.jpg";
+                        <li><a href="@Url.Action("ChiTietSanPham","SanPhams",new { id = item.SanPham.ID })"><canvas></canvas><img src="@Url.Content(ImagePath)" alt="Marsa Alam underawter close up"></a></li>
+                    }
+                </ul>
+                <span class="arrow previous"></span>
+                <span class="arrow next"></span>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+}
+@{Html.RenderAction("ProductHome", "Home");}
+
+

@@ -1,0 +1,77 @@
+﻿@model QLXe.Models.HinhAnh
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tạo mới</h2>
+
+@using (Html.BeginForm("Create", "HinhAnhs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Hình ảnh</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.AnhTruoc, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img src="~/wwwroot/Images/no_img.jpg" width="100" id="outputAnhTruoc" />
+                <label for="ufile">Chọn ảnh</label>
+                <input type="file" onchange="LoadFile(event,'outputAnhTruoc')" id="ufile" name="InputAnhTruoc" style="display: block;" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.AnhTrai, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img src="~/wwwroot/Images/no_img.jpg" width="100" id="outputAnhTrai" />
+                <label for="ufileTrai">Chọn ảnh</label>
+                <input type="file" onchange="LoadFile(event, 'outputAnhTrai')" id="ufileTrai" name="InputAnhTrai" style="display: block;" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.AnhSau, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img src="~/wwwroot/Images/no_img.jpg" width="100" id="outputAnhSau" />
+                <label for="ufileSau">Chọn ảnh</label>
+                <input type="file" onchange="LoadFile(event, 'outputAnhSau')" id="ufileSau" name="InputAnhSau" style="display: block;" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AnhPhai, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img src="~/wwwroot/Images/no_img.jpg" width="100" id="outputAnhPhai" />
+                <label for="ufilePhai">Chọn ảnh</label>
+                <input type="file" onchange="LoadFile(event, 'outputAnhPhai')" id="ufilePhai" name="InputAnhPhai" style="display: block;" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID_SanPham, "Tên sản phẩm", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ID_SanPham", ViewBag.ID_DanhMuc as SelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ID_SanPham, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Tạo mới" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Trở lại", "Index")
+</div>
+<script>
+    var LoadFile = function (event, outputId) {
+        var img = document.getElementById(outputId);
+        img.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>

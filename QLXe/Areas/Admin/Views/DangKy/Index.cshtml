@@ -1,0 +1,159 @@
+﻿<html dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trang đăng ký</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Assets/admin/assets/images/logoicon.png" />
+    <!-- Custom CSS -->
+    <link href="/Assets/admin/dist/css/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <!-- Registration box -->
+        <div class="auth-wrapper d-flex justify-content-center align-items-center bg-dark">
+            <div class="auth-box bg-dark border-top border-secondary">
+                <div class="text-center pt-3 pb-3">
+                    <span class="db">
+                        <a href="@Url.Action("Index","Home", new { area = "" })"><img src="~/Assets/admin/assets/images/logo-text.png" alt="logo" /></a>
+                    </span>
+                </div>
+                <!-- Registration Form -->
+                @using (Html.BeginForm("Index", "DangKy", new { area = "Admin" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row pb-4" style="display: flex">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-success text-white h-100">
+                                        <i class="mdi mdi-account fs-4"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control form-control-lg" placeholder="Tên đăng nhập" required="" name="FullName" />
+                            </div>
+                            
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-warning text-white h-100">
+                                        <i class="mdi mdi-email fs-4"></i>
+                                    </span>
+                                </div>
+                                <input type="email" class="form-control form-control-lg" placeholder="Email" required="" name="Email" />
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-info text-white h-100">
+                                        <i class="mdi mdi-lock fs-4"></i>
+                                    </span>
+                                </div>
+                                <input type="password" class="form-control form-control-lg" placeholder="Mật khẩu" required="" name="Password" id="password" />
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-info text-white h-100">
+                                        <i class="mdi mdi-lock fs-4"></i>
+                                    </span>
+                                </div>
+                                <input type="password" class="form-control form-control-lg" placeholder="Xác nhận Mật khẩu" required="" name="ConfirmPassword" id="confirmPassword" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-success text-white h-100">
+                                        <i class="mdi mdi-account fs-4"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control form-control-lg" placeholder="Họ và họ đệm" required="" name="Ho" />
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-success text-white h-100">
+                                        <i class="mdi mdi-account fs-4"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control form-control-lg" placeholder="Tên" required="" name="Ten" />
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-success text-white h-100">
+                                        <i class="mdi mdi-account-location fs-4"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control form-control-lg" placeholder="Địa chỉ" required="" name="DiaChi" />
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-success text-white h-100">
+                                        <i class="mdi mdi-phone fs-4"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control form-control-lg" placeholder="Số điện thoại" required="" name="SDT" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row border-top border-secondary">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="pt-3">
+                                    <a style=" width:140px" class="btn btn-success float-start text-white" href="@Url.Action("Index", "Login", new { area = "Admin" })">Trở lại đăng nhập</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <div class="pt-3">
+                                    <button class="btn btn-success float-end text-white" type="submit" onclick="validatePassword()">Đăng ký</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- All Required js -->
+    <script src="/Assets/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/Assets/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(".preloader").fadeOut();
+
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                alert("Xác nhận mật khẩu không khớp. Vui lòng nhập lại.");
+                return false;
+            }
+
+            // Nếu xác nhận mật khẩu khớp, submit biểu mẫu
+            document.forms[0].submit(); // Submit biểu mẫu đăng ký
+        }
+        @if (ViewBag.TaoTaiKhoan != null)
+        {
+            <text>
+                alert("@Html.Raw(ViewBag.TaoTaiKhoan)");
+            </text>
+            // Reset ViewBag.TaoTaiKhoan để không hiển thị lại khi tải lại trang
+            ViewBag.TaoTaiKhoan = null;
+        }
+        @if (ViewBag.Error != null)
+        {
+            <text>
+                alert("@Html.Raw(ViewBag.Error)");
+            </text>
+            // Reset ViewBag.TaoTaiKhoan để không hiển thị lại khi tải lại trang
+            ViewBag.Error = null;
+        }
+        
+    </script>
+
+</body>
+</html>

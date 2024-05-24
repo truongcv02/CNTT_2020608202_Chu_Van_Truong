@@ -1,0 +1,230 @@
+﻿
+@model IEnumerable<QLXe.Models.GioHang>
+<link rel="stylesheet" href="~/Content/styles.css" />
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var khachHang = Model.First().KhachHang;
+}
+
+<div class="container">
+    <div style="width: 50%">
+        <p style="padding-left: 300px; padding-top:20px; font-size: 20px">Thông tin giao hàng</p>
+        <form id="delivery-form">
+            <div class="yIbrbf">
+                <div class="xGNBnf">
+                    <div class="AWcBIN">Địa chỉ mới</div>
+                    <div class="_6F6F6R">Để đặt hàng, vui lòng thêm địa chỉ nhận hàng</div>
+                    <div class="YAJva_">
+                        <div class="PZh1BS">
+                            <div class="H7VmLA">
+                                <div class="dVRfp_ b_jbPP">
+                                    <div class="sS5qSb">
+                                        <div class="MH2_5d">Họ và tên</div>
+                                        <p id="full-name" class="KqpBMI" type="text" placeholder="Họ và tên" autocomplete="name" maxlength="64" aria-describedby="input-error-message_2f3d7b33-7f24-4b34-87c6-98aa9f4767db" fdprocessedid="gd8kz">@khachHang.Ho @khachHang.Ten</p>
+                                    </div>
+                                </div>
+                                <div class="ReuJh6"></div>
+                                <div class="dVRfp_ b_Y6V5">
+                                    <div class="sS5qSb">
+                                        <div class="MH2_5d">Số điện thoại</div>
+                                        <input class="KqpBMI" type="text" placeholder="Số điện thoại" value="@khachHang.DienThoai" id="phone-number" autocomplete="user-address-phone" aria-describedby="phone-error-message_9a67f727-95ff-4f95-bd34-8a9041055ff6" fdprocessedid="84lhvb">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="H7VmLA">
+                                <div class="TsKNd0">
+                                    <div class="rxIZZV GDGncK UwyB8b">
+                                        <div class="HdeOE8">
+                                            <div class="jweLfr">Địa chỉ cụ thể</div>
+                                            <input class="TZg2O8" value="@khachHang.DiaChi" id="address" rows="2" placeholder="Địa chỉ cụ thể" autocomplete="user-street-address" maxlength="128">
+                                        </div>
+                                    </div>
+                                    <div class="Ei6nFC">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div style="width: 50%; padding-left: 20px">
+        <h1 style="padding-left: 300px; padding-top: 20px; font-size: 20px">Thông tin đơn hàng</h1>
+        <div class="yIbrbf">
+            <div class="xGNBnf">
+                @ViewBag.ID_KhachHang
+                @{
+                    int p = 0;
+                }
+                @foreach (var item in Model)
+                {
+
+                    p++;
+                    ViewBag.ID_KhachHang = item.ID_KhachHang;
+                    <div class="checkout-shop-children">
+                        <div id="item_i14041b00d" class="cart-item" data-idsp="@item.ID_SanPham" data-id="@item.ID">
+                            <div class="cart-item-inner">
+                                <div class="cart-item-left">
+                                    <div class="img-wrap">
+                                        @{
+                                            var anhPhai = item.SanPham.HinhAnh.FirstOrDefault(h => h.ID_SanPham == item.ID_SanPham)?.AnhPhai;
+                                            string ImagePath = "~/wwwroot/Images/" + anhPhai;
+                                        }
+                                        <a href="@Url.Action("ChiTietSanPham", "SanPhams", new { id = item.ID_SanPham })" id="image-product" class="image-product">
+                                            <img class="img" src="@Url.Content(ImagePath)" alt="item" style="width: 1000px">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <a id="name-product" href="@Url.Action("ChiTietSanPham", "SanPhams", new { id = item.ID_SanPham })" class="name-product" style="font-size: 20px">
+                                            @item.SanPham.TenXe
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="cart-item-middle">
+                                    <div>
+                                        <span class="current-price"><del>@string.Format("{0:N0} VND", item.SanPham.GiaBan)</del></span>
+                                        <span class="current-price">@string.Format("{0:N0} VND", item.SanPham.GiaBan * (100 - item.SanPham.KhuyenMai.PhanTramGiamGia) / 100)</span>
+                                    </div>
+                                </div>
+                                <div class="cart-item-right">
+                                    <button class="btn-active btn-outline-secondary decrease" type="button" data-idsp="@item.ID_SanPham" data-id="@item.ID">-</button>
+                                    <input style="width: 20px" type="text" id="quantity-input-@item.ID" class="form-control quantity-input" value="@item.SoLuong" disabled>
+                                    <button class="btn-active btn btn-outline-secondary increase" type="button" data-id="@item.ID">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 }
+                <table>
+                    @if (p != 0)
+                    {
+
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-right">
+                                    <strong>Tổng tiền: <span id="total">@Model.Sum(item => item.SanPham.GiaBan * (100 - item.SanPham.KhuyenMai.PhanTramGiamGia) / 100 * item.SoLuong ?? 0).ToString("N0")</span> VNĐ</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <a href="@Url.Action("Index", "SanPhams")" class="btn btn-warning">
+                                        <i class="fa fa-angle-left"></i> Tiếp tục mua hàng
+                                    </a>
+                                </td>
+                                <td colspan="5" align="right">
+                                    <a href="#" class="btn btn-success btn-block" id="btnThanhToan">
+                                        Xác nhận đặt hàng<i class="fa fa-angle-right"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    }
+                    @if (p == 0)
+                    {
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <a href="@Url.Action("Index", "SanPhams")" class="btn btn-warning">
+                                        <i class="fa fa-angle-left"></i> Tiếp tục mua hàng
+                                    </a>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    }
+                </table>                          
+             </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>         
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Đảm bảo jQuery đã được bao gồm -->
+<script type="text/javascript">
+    function updateTotal() {
+        var total = 0;
+        // Lặp qua mỗi ô chọn
+        $('.product-checkbox').each(function () {
+            if ($(this).is(':checked')) { // Kiểm tra nếu ô chọn được chọn
+                // Lấy giá sản phẩm từ thuộc tính tùy chỉnh 'data-price' của ô chọn
+                var price = parseFloat($(this).data('price'));
+
+                // Tìm ô số lượng tương ứng và tính tổng tiền
+                var accountId = $(this).data('id');
+                var quantityInput = $('#quantity-input-' + accountId);
+                var quantity = parseInt(quantityInput.val());
+                total += (price * quantity);
+            }
+        });
+
+        // Cập nhật tổng tiền
+        $('#total').text(total.toLocaleString());
+    }
+    $(document).ready(function () {
+        $('.btn-active').click(function () {
+            var button = $(this);
+            var accountId = button.data('id');
+            var type = button.hasClass('increase') ? 'increase' : 'decrease'; // Kiểm tra nút là tăng hay giảm số lượng
+            var input = $('#quantity-input-' + accountId);
+            var currentQuantity = parseInt(input.val());
+
+            if (type === 'decrease') {
+                currentQuantity--;
+            } else if (type === 'increase') {
+                currentQuantity++;
+            } else {
+                return;
+            }
+
+            $.ajax({
+                url: '/GioHangs/Update/' + accountId,
+                type: 'POST',
+                data: { id: accountId, quantity: currentQuantity, type: type },
+                success: function (result) {
+                    if (result.success == true && result.removed == false) {
+                        input.val(currentQuantity);
+
+                        // Cập nhật thành tiền của sản phẩm
+                        var thanhTien = result.thanhTien.toLocaleString();
+                        var thanhTienCell = button.closest('tr').find('.thanh-tien');
+                        thanhTienCell.text(thanhTien + ' VNĐ');
+
+                        // Cập nhật tổng tiền
+                        var total = result.total.toLocaleString();
+                        $('#total').text(total);
+                    } else {
+                        if (result.success == true && result.removed == true) {
+                            var idKhachHang = @ViewBag.ID_KhachHang; // Lấy giá trị ID_KhachHang từ ViewBag
+                            window.location.href = '/GioHangs/Index?id=' + idKhachHang;
+                        } else
+                            alert(result.message);
+                    }
+                },
+                error: function () {
+                    alert('Đã xảy ra lỗi trong quá trình xử lý yêu cầu.');
+                }
+            });
+        });
+        $('#btnThanhToan').click(function () {
+            var idSanPhamArray = [];
+
+            // Lặp qua mỗi sản phẩm
+            $('.cart-item').each(function () {
+                var idSanPham = $(this).data('idsp');
+                idSanPhamArray.push(idSanPham);
+            });
+            var fullName = $('#full-name').val();
+            var address = $('#address').val();
+            var phoneNumber = $('#phone-number').val();
+            // Tạo URL sử dụng Url.Action và truyền vào mảng các Id_SanPham
+            var url = '@Url.Action("Index", "DatHang")' + '?ids=' + idSanPhamArray.join(',') + '&DiaChi=' + address + '&DienThoai=' + phoneNumber;
+            // Chuyển hướng đến URL được tạo
+            window.location.href = url;
+        });
+    });
+
+</script>

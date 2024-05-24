@@ -1,0 +1,226 @@
+﻿<style>
+    .QmO3Bu {
+        background: #fff;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        display: flex;
+        margin-bottom: 12px;
+        overflow: hidden;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+    }
+    h2 {
+        display: block;
+        font-size: 1.5em;
+        margin-block-start: 0.83em;
+        margin-block-end: 0.83em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+    }
+        h1.a11y-hidden, h2.a11y-hidden, h3.a11y-hidden {
+            height: 1px;
+            left: -9999px;
+            overflow: hidden;
+            position: absolute;
+            width: 1px;
+        }
+    .KI5har {
+        align-items: center;
+        background: #fff;
+        border-bottom: 2px solid rgba(0,0,0,.09);
+        color: rgba(0,0,0,.8);
+        cursor: pointer;
+        display: flex;
+        flex: 1;
+        font-size: 16px;
+        justify-content: center;
+        line-height: 19px;
+        overflow: hidden;
+        padding: 16px 0;
+        text-align: center;
+        transition: color .2s;
+        user-select: none;
+    }
+</style>
+@model IEnumerable<QLXe.Models.DonHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="QmO3Bu" aria-role="tablist">
+    <h2 class="a11y-hidden"></h2>
+    <a class="KI5har" title="Tất cả" aria-role="tab" aria-selected="false" aria-controls="olp_panel_id-0.1376023467639147" id="olp_tab_id-0.1376023467639147" href="@Url.Action("Index","DonHangs",new { id = ViewBag.ID_KhachHang, tt=0 })">
+        <span class="NoH9rC">Tất cả</span>
+    </a>
+    <a class="KI5har" title="Chờ Xác nhận" aria-role="tab" aria-selected="false" aria-controls="olp_panel_id-0.4177000299726785" id="olp_tab_id-0.4177000299726785" href="@Url.Action("Index","DonHangs",new { id = ViewBag.ID_KhachHang, tt=1 })">
+        <span class="NoH9rC">Chờ xác nhận</span>
+    </a>
+    <a class="KI5har" title="Đã xác nhận" aria-role="tab" aria-selected="false" aria-controls="olp_panel_id-0.05656814264414067" id="olp_tab_id-0.05656814264414067" href="@Url.Action("Index","DonHangs",new { id = ViewBag.ID_KhachHang, tt=2 })">
+        <span class="NoH9rC">Đã xác nhận</span>
+    </a>
+    <a class="KI5har" title="Đã xác nhận" aria-role="tab" aria-selected="false" aria-controls="olp_panel_id-0.05656814264414067" id="olp_tab_id-0.05656814264414067" href="@Url.Action("Index","DonHangs",new { id = ViewBag.ID_KhachHang, tt=5 })">
+        <span class="NoH9rC">Chờ cọc tiền</span>
+    </a>
+    <a class="KI5har" title="Đã xác nhận" aria-role="tab" aria-selected="false" aria-controls="olp_panel_id-0.05656814264414067" id="olp_tab_id-0.05656814264414067" href="@Url.Action("Index","DonHangs",new { id = ViewBag.ID_KhachHang, tt=6 })">
+        <span class="NoH9rC">Đã cọc tiền</span>
+    </a>
+    <a class="KI5har" title="Hoàn thành" aria-role="tab" aria-selected="false" aria-controls="olp_panel_id-0.13875063518945918" id="olp_tab_id-0.13875063518945918" href="@Url.Action("Index","DonHangs",new { id = ViewBag.ID_KhachHang, tt=3 })">
+        <span class="NoH9rC">Hoàn thành</span>
+    </a>
+    <a class="KI5har" title="Đã hủy" aria-role="tab" aria-selected="false" aria-controls="olp_panel_id-0.4712717930583834" id="olp_tab_id-0.4712717930583834" href="@Url.Action("Index","DonHangs",new { id = ViewBag.ID_KhachHang, tt=4 })">
+        <span class="NoH9rC">Đã hủy</span>
+    </a>
+</section>
+@foreach (var item in Model)
+{
+    <div class="container" style="display: grid">
+        @{
+            var danhSachChiTiet = item.ChiTietDonHang.ToList();
+            foreach (var aka in danhSachChiTiet)
+            {
+                ViewBag.ID_KhachHang = item.ID_KhachHang;
+                <div class="row" style="display: flex">
+                    <div style="width:16%">
+                        @{
+                            var anhPhai = aka.SanPham.HinhAnh.FirstOrDefault(h => h.ID_SanPham == aka.ID_SanPham)?.AnhPhai;
+                            string ImagePath = "~/wwwroot/Images/" + anhPhai;
+                        }
+                        <a href="@Url.Action("ChiTietSanPham", "SanPhams", new { id = aka.ID_SanPham })" id="image-product" class="image-product">
+                            <img class="img" src="@Url.Content(ImagePath)" alt="item" style="width: 200px">
+                        </a>
+                    </div>
+                    <div style="padding-top: 50px; width:84%">
+                        <div class="">
+                            <a id="name-product" href="@Url.Action("ChiTietSanPham", "SanPhams", new { id = aka.ID_SanPham })" class="name-product" style="font-size: 20px">
+                                @aka.SanPham.TenXe
+                            </a>
+                        </div>
+                        <div>
+                            <div class="cart-item-middle">
+                                <div>
+                                    <p class="current-price">@string.Format("{0:N0} VND", aka.SanPham.GiaBan * (100 - aka.SanPham.KhuyenMai.PhanTramGiamGia) / 100))</p>
+                                </div>
+                            </div>
+                            <div class="cart-item-right">
+                                <p>Số lượng: @aka.SoLuong</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    <div class="row" style="display: inline">
+        @{
+            switch (item.TinhTrang)
+            {
+                case 1: <p>Tình trạng: Chờ xác nhận</p>
+                    break;
+                case 2: <p>Tình trạng: Đang giao hàng</p>
+                    break;
+                case 3: <p>Tình trạng: Hoàn thành</p>
+                    break;
+                case 4: <p>Tình trạng: Đã hủy</p>
+                    break;
+                case 5: <p>Tình trạng: Chưa cọc</p>
+                    break;
+                case 6: <p>Tình trạng: Đã cọc</p>
+                    break;
+                default: <p>Không xác định</p>
+                    break;
+            }
+        }
+        <p>Tổng tiền: ₫@item.TongGiaTri</p>
+        @if (item.TinhTrang == 1)
+        {
+            <div style="display: flex; align-items: center;">
+                <p style="width: 50%;">Quý khách có thể hủy đơn hàng khi chưa được xác nhận. Nếu đã xác nhận, vui lòng liên hệ lại cho cửa hàng.</p>
+                <button class="btn-active" data-id="@item.ID" style="background-color: #ff4500; border: none; color: white; width: 100px; height: 50px; margin-left: auto;">Hủy đơn hàng</button>
+            </div>
+        }
+        @if (item.TinhTrang == 2)
+        {
+            <div style="display: flex; align-items: center;">
+                <p style="width: 50%;">Quý khách có thể hủy đơn hàng khi chưa được xác nhận. Nếu đã xác nhận, vui lòng liên hệ lại cho cửa hàng.</p>
+                <div data-id="@item.ID" style="align-content: center; text-align: center; background-color: #ff4500; border: none; color: white; width: 100px; height: 50px; margin-left: auto; ">Đơn hàng đang được giao</div>
+            </div>
+        }
+
+        @if (item.TinhTrang == 3)
+        {
+            <div style="display: flex; align-items: center;">
+                <p style="width: 50%;">Quý khách có thể hủy đơn hàng khi chưa được xác nhận. Nếu đã xác nhận, vui lòng liên hệ lại cho cửa hàng.</p>
+                <div data-id="@item.ID" style="align-content: center; text-align: center; background-color: #ff4500; border: none; color: white; width: 100px; height: 50px; margin-left: auto; ">Đã hoàn thành</div>
+            </div>
+        }
+
+        @if (item.TinhTrang == 4)
+        {
+            <div style="display: flex; align-items: center;">
+                <p style="width: 50%;">Quý khách có thể hủy đơn hàng khi chưa được xác nhận. Nếu đã xác nhận, vui lòng liên hệ lại cho cửa hàng.</p>
+                <div data-id="@item.ID" style="align-content: center; text-align:center; background-color: gray; border: none; color: white; width: 100px; height: 50px; margin-left: auto;">Đã hủy</div>
+            </div>
+        }
+        @if (item.TinhTrang == 5)
+        {
+            <div style="display: flex; align-items: center;">
+                <p style="width: 50%;">Quý khách có thể hủy đơn hàng khi chưa được xác nhận. Nếu đã xác nhận, vui lòng liên hệ lại cho cửa hàng.</p>
+                <a href="@Url.Action("ThanhToanLai","DatHang",new { idDonHang = item.ID })" 
+                   style="align-content: center; text-align:center; background-color:red; border: none; color: white; width: 100px; height: 50px; margin-left: auto; display: inline-block; text-decoration: none; line-height: 50px; text-align: center;">
+                    Tiến hành cọc
+                </a>
+            </div>
+        }
+        @if (item.TinhTrang == 6)
+        {
+            <div style="display: flex; align-items: center;">
+                <p style="width: 50%;">Quý khách có thể  hủy đơn hàng khi chưa được xác nhận. Nếu đã xác nhận, vui lòng liên hệ lại cho cửa hàng.</p>
+                <div data-id="@item.ID" style="align-content: center; text-align:center; background-color:chartreuse; border: none; color: white; width: 100px; height: 50px; margin-left: auto;">Đã cọc</div>
+            </div>
+        }
+    </div>
+    </div>
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.btn-active').click(function () {
+            var button = $(this);
+            var DonHangtId = button.data('id');
+
+            // Hiển thị hộp thoại xác nhận
+            if (confirm("Bạn có chắc chắn muốn thực hiện hành động này không?")) {
+                // Nếu người dùng đồng ý
+                // Gửi yêu cầu AJAX để cập nhật trạng thái "Khóa"
+                $.ajax({
+                    url: '/DonHangs/ToggleLock/' + DonHangtId,
+                    type: 'POST',
+                    success: function (result) {
+                        if (result.success) {
+                            alert(result.message);
+                            // Load lại trang sau khi người dùng đóng alert
+                            location.reload();
+                        } else {
+                            alert(result.message);
+                            // Load lại trang sau khi người dùng đóng alert
+                            location.reload();
+                        }
+                    },
+                    error: function () {
+                        alert('Đã xảy ra lỗi trong quá trình xử lý yêu cầu.');
+                        // Load lại trang sau khi người dùng đóng alert
+                        location.reload();
+                    }
+                });
+            } else {
+                // Nếu người dùng hủy bỏ
+                // Không thực hiện gì cả
+            }
+        });
+    });
+</script>

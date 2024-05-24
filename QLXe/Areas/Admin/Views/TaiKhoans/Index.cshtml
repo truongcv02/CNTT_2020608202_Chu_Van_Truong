@@ -1,0 +1,78 @@
+﻿@model IEnumerable<QLXe.Models.TaiKhoan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách tài khoản</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.KhachHang.Ten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Khoa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayLap)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhachHang.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                <a href="#" class="btn-active" data-id="@item.ID">@(item.Khoa ? "Mở khóa": "Khóa")</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayLap)
+            </td>
+            <td>
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-info btn-sm" })
+            </td>
+        </tr>
+    }
+</table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Đảm bảo jQuery đã được bao gồm -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.btn-active').click(function () {
+            var button = $(this);
+            var accountId = button.data('id');
+
+            // Gửi yêu cầu AJAX để cập nhật trạng thái "Khóa"
+            $.ajax({
+                url: '/TaiKhoans/ToggleLock/' + accountId,
+                type: 'POST',
+                success: function (result) {
+                    if (result.success) {
+                        // Cập nhật nút và hiển thị thông báo
+                        if (result.a) newText = "Mở khóa";
+                        else newText = "khóa";
+                        button.text(newText);
+                        alert(result.message);
+                    } else {
+                        alert(result.message);
+                    }
+                },
+                error: function () {
+                    alert('Đã xảy ra lỗi trong quá trình xử lý yêu cầu.');
+                }
+            });
+        });
+    });
+</script>
+
+

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<QLXe.Models.DanhMuc>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách danh mục</h2>
+
+<p>
+    @Html.ActionLink("Tạo danh mục cấp 2", "Create") <br />
+    @Html.ActionLink("Tạo danh mục cấp 1", "Create1")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên danh mục
+        </th>
+        <th>
+            Hiển thị danh mục con
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.ID_DanhMuc == null)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenDanhMuc)
+                </td>
+                <td>
+                    <button class="HienThi" onclick="HienThi(this)">v</button>
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit1", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Chi tiết", "Details1", new { id = item.ID }, new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("Xóa", "Delete1", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+        foreach (var con in Model)
+        {
+            if (con.ID_DanhMuc == item.ID)
+            {
+                <tr class="DanhMucCon" style="display: none;" data-parent-id="@item.ID">
+                    <td style="padding-left: 30px;">
+                        @Html.DisplayFor(modelItem => con.TenDanhMuc)
+                    </td>
+                    <td></td>
+                    <td>
+                        @Html.ActionLink("Sửa", "Edit", new { id = con.ID }, new { @class = "btn btn-primary btn-sm" })
+                        @Html.ActionLink("Chi tiết", "Details", new { id = con.ID }, new { @class = "btn btn-info btn-sm" })
+                        @Html.ActionLink("Xóa", "Delete", new { id = con.ID }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        }
+        <tr id="dung" style="display: block;"></tr>
+    }
+
+</table>
+<script>
+
+    function HienThi(button) {
+
+        var row = button.parentElement.parentElement; // Lấy thẻ tr gốc của button được bấm
+        if (row.nextElementSibling.style.display == "none") {
+            while (row.nextElementSibling.style.display == "none") {
+                var conRow = row.nextElementSibling; // Lấy dòng tiếp theo (danh mục con)
+
+                conRow.style.display = "table-row";
+
+                row = conRow;
+            }
+            button.innerHTML = "^";
+        }
+        else {
+            if (row.nextElementSibling.style.display == "table-row") {
+                while (row.nextElementSibling.style.display == "table-row") {
+                    var conRow = row.nextElementSibling; // Lấy dòng tiếp theo (danh mục con)
+
+                    conRow.style.display = "none";
+
+                    row = conRow;
+                }
+
+            }
+            button.innerHTML = "v";
+        }
+
+
+    }
+</script>

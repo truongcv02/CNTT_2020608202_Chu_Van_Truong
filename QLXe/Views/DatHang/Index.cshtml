@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    if (ViewBag.result == true)
+    {
+        <div class="alert alert-success" role="alert">
+            Đơn hàng của bạn đã được đặt thành công!
+        </div>
+    }
+    else
+    {
+        <h3>Có lỗi xảy ra!</h3>
+        <h2>@ViewBag.result</h2>
+    }
+
+}
+
+

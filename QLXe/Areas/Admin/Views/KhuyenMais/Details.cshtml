@@ -1,0 +1,35 @@
+﻿@model QLXe.Models.KhuyenMai
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết khuyến mãi</h2>
+
+<div>
+    <h4>Khuyến mãi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenKhuyenMai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenKhuyenMai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhanTramGiamGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhanTramGiamGia)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Trở lại", "Index")
+</p>

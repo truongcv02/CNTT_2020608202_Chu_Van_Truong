@@ -1,0 +1,553 @@
+﻿
+.xGNBnf {
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	padding: 30px;
+	max-width: 100%;
+}
+
+.AWcBIN {
+	align-items: center;
+	display: flex;
+	font-size: 20px;
+}
+
+._6F6F6R {
+	font-size: 12px;
+	font-weight: 400;
+	margin-top: 10px;
+	width: 100%;
+}
+
+.YAJva_ {
+	box-sizing: border-box;
+	height: 480px;
+	padding-top: 15px;
+	position: relative;
+}
+
+.YAJva_ {
+	flex-direction: column;
+}
+
+.H7VmLA, .YAJva_, .tq8lde {
+	display: flex;
+}
+
+.PZh1BS {
+	flex: 1;
+	padding-bottom: 66px;
+	-ms-overflow-style: none;
+}
+
+.H7VmLA {
+	width: 100%;
+}
+
+.H7VmLA, .YAJva_, .tq8lde {
+	display: flex;
+}
+
+.BwN4u3, .GDGncK, .O0jnO0, .b_Y6V5, .b_jbPP, .hYpIFW {
+	flex: 1;
+}
+
+.dVRfp_ {
+	margin-bottom: 15px;
+	margin-top: 6px;
+	position: relative;
+}
+
+.ReuJh6 {
+	width: 16px;
+}
+
+.BwN4u3, .GDGncK, .O0jnO0, .b_Y6V5, .b_jbPP, .hYpIFW {
+	flex: 1;
+}
+
+.dVRfp_ {
+	margin-bottom: 15px;
+	margin-top: 6px;
+	position: relative;
+}
+
+.sS5qSb {
+	border: 1px solid rgba(0,0,0,.14);
+	border-radius: 2px;
+	box-shadow: inset 0 2px 0 0 rgb(0 0 0 / 2%);
+	box-sizing: border-box;
+	height: 40px;
+	position: relative;
+	transition: border-color .3s ease-in-out,box-shadow .3s ease-in-out,background-color .3s ease-in-out;
+}
+
+.sS5qSb, .uNkxlD {
+	align-items: center;
+	display: flex;
+}
+
+.MH2_5d {
+	background: #fff;
+	color: rgba(0,0,0,.4);
+	display: none;
+	font-size: 12px;
+	left: 10px;
+	padding: 0 3px;
+	position: absolute;
+	top: -6px;
+}
+
+.KqpBMI {
+	background-color: transparent;
+	border: 0;
+	box-sizing: border-box;
+	color: #222;
+	flex: 1;
+	font-size: 14px;
+	height: 38px;
+	min-width: 0;
+	outline: none;
+	padding: 10px;
+	width: 100%;
+}
+
+.z1jbcl {
+	flex: 1;
+	margin-bottom: 15px;
+	position: relative;
+}
+
+.M3FWKH {
+	margin-top: 6px;
+	position: relative;
+}
+
+.pREHvc {
+	border: 1px solid rgba(0,0,0,.14);
+	border-radius: 2px;
+	box-shadow: inset 0 2px 0 0 rgb(0 0 0 / 2%);
+	box-sizing: border-box;
+	min-height: 40px;
+	position: relative;
+	transition: border-color .3s ease-in-out,box-shadow .3s ease-in-out,background-color .3s ease-in-out;
+}
+
+.m0pgZ4, .pREHvc {
+	display: flex;
+}
+
+.m0pgZ4, .pREHvc {
+	align-items: center;
+}
+
+.J0PaBy {
+	background: #fff;
+	color: rgba(0,0,0,.4);
+	display: none;
+	font-size: 12px;
+	left: 10px;
+	padding: 0 3px;
+	position: absolute;
+	top: -6px;
+}
+
+.QH42as, .Uoxa8y, .qJkAfp {
+	box-sizing: border-box;
+	flex: 1;
+	padding: 10px;
+}
+
+	.Uoxa8y::placeholder, .vP6dqh {
+		color: #bbb;
+	}
+
+.qJkAfp {
+	outline: none;
+	word-break: normal;
+}
+
+.QH42as, .Uoxa8y, .qJkAfp {
+	box-sizing: border-box;
+	flex: 1;
+	padding: 10px;
+}
+
+.Uoxa8y, .vQOYHy {
+	color: #222;
+}
+
+.kUjMvM {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+.Uoxa8y {
+	background-color: transparent;
+	border: 0;
+	height: 38px;
+	min-width: 0;
+	outline: none;
+}
+/* Điều chỉnh kích thước của hình ảnh */
+#cart img {
+	max-width: 80px; /* Điều chỉnh kích thước theo ý muốn */
+	max-height: 80px; /* Điều chỉnh kích thước theo ý muốn */
+	display: block;
+	margin: 0 auto;
+}
+
+/* Định dạng cho các nút trong cột */
+#cart .btn {
+	margin-right: 5px;
+}
+
+/* Định dạng cho các nút trong footer */
+#cart tfoot .btn {
+	margin-top: 10px;
+}
+
+/* Định dạng cho tiêu đề của bảng */
+#cart thead th {
+	text-align: center;
+	font-size: 20px; /* Kích thước chữ to lên */
+	font-weight: bold; /* Chữ in đậm */
+	padding-top: 20px; /* Tạo ra khoảng trống ở trên */
+}
+
+/* Định dạng cho các dòng dữ liệu trong bảng */
+#cart tbody td {
+	text-align: center;
+	font-size: 18px; /* Kích thước chữ to lên */
+}
+
+	/* Định dạng cho cột cuối cùng */
+	#cart tbody td:last-child {
+		text-align: center;
+	}
+
+/* Định dạng cho footer */
+#cart tfoot td {
+	text-align: center;
+}
+
+.btn-success {
+	border: 2px solid #00bfff; /* Màu và độ dày của khung */
+	background-color: #00bfff; /* Màu nền */
+	color: #fff; /* Màu chữ */
+	padding: 15px 30px;
+	font-size: 20px;
+}
+
+.quantity-input {
+	width: 10px; /* Điều chỉnh kích thước theo ý muốn */
+}
+
+.tq8lde {
+	background: linear-gradient(hsla(0,0%,100%,.7),#fff);
+	bottom: 0;
+	height: 66px;
+	left: 0;
+	position: absolute;
+	right: 0;
+}
+
+.tq8lde {
+	justify-content: flex-end;
+}
+
+.H7VmLA, .YAJva_, .tq8lde {
+	display: flex;
+}
+
+.tq8lde {
+	align-items: flex-end;
+}
+
+.xfVPEs {
+	color: #555;
+}
+
+.eC66RO {
+	align-items: center;
+	background: none;
+	border: 0;
+	border-radius: 2px;
+	cursor: pointer;
+	display: flex;
+	font-size: 14px;
+	justify-content: center;
+	min-width: 140px;
+	outline: none;
+	padding: 10px;
+}
+
+.eWwHP4 {
+	background-color: #ee4d2d;
+	color: #fff;
+}
+
+.eC66RO {
+	align-items: center;
+	background: none;
+	border: 0;
+	border-radius: 2px;
+	cursor: pointer;
+	display: flex;
+	font-size: 14px;
+	justify-content: center;
+	min-width: 140px;
+	outline: none;
+	padding: 10px;
+}
+
+.TsKNd0 {
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+.UwyB8b.UwyB8b {
+	margin-bottom: 0;
+}
+
+.BwN4u3, .GDGncK, .O0jnO0, .b_Y6V5, .b_jbPP, .hYpIFW {
+	flex: 1;
+}
+
+.HdeOE8 {
+	border: 1px solid rgba(0,0,0,.14);
+	border-radius: 2px;
+	box-shadow: inset 0 2px 0 0 rgb(0 0 0 / 2%);
+	box-sizing: border-box;
+	height: -webkit-fit-content;
+	height: -moz-fit-content;
+	height: fit-content;
+	transition: border-color .3s ease-in-out,box-shadow .3s ease-in-out,background-color .3s ease-in-out;
+}
+
+.HdeOE8 {
+	align-items: center;
+	display: flex;
+}
+
+.jweLfr {
+	background: #fff;
+	color: rgba(0,0,0,.4);
+	display: none;
+	font-size: 12px;
+	left: 10px;
+	padding: 0 3px;
+	position: absolute;
+	top: -6px;
+}
+
+.TZg2O8:disabled {
+	color: #e7e7e7;
+	-webkit-text-fill-color: #e7e7e7;
+}
+
+.TZg2O8:read-only {
+	color: #bbb;
+	pointer-events: none;
+}
+
+.TZg2O8 {
+	background-color: transparent;
+	border: 0;
+	box-sizing: border-box;
+	color: #222;
+	flex: 1;
+	font-size: 14px;
+	min-width: 0;
+	outline: none;
+	padding: 10px;
+	resize: none;
+	width: 100%;
+}
+
+.container {
+	display: flex;
+}
+
+.cart-item {
+	width: 100%;
+	padding: 16px 0;
+	background-color: #fff;
+	font-size: 12px;
+	font-weight: 400;
+	text-align: left;
+}
+
+.cart-item-inner {
+	width: 100%;
+	display: table;
+}
+
+.cart-item-left {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.cart-item-left {
+	display: table-cell;
+	vertical-align: top;
+	width: calc(100% - 156px - 139px);
+	padding-left: 10px;
+}
+
+	.cart-item-left .img-wrap {
+		position: relative;
+		float: left;
+		width: 80px;
+		height: 80px;
+		margin-right: 12px;
+	}
+
+	.cart-item-left .content {
+		display: inline-block;
+		width: 328px;
+		position: relative;
+	}
+
+.cart-item-middle {
+	display: table-cell;
+	vertical-align: top;
+	width: 156px;
+	max-width: 156px;
+	padding-left: 9px;
+}
+
+	.cart-item-middle .current-price {
+		font-size: 18px;
+		line-height: 28px;
+		color: #f57224;
+		font-weight: 500;
+		margin-bottom: 4px;
+	}
+
+.cart-item .cart-item-right {
+	vertical-align: top;
+}
+
+.cart-item-right {
+	display: table-cell;
+	vertical-align: bottom;
+	padding-right: 40px;
+}
+
+.cart-item-right {
+	display: table-cell;
+	vertical-align: top;
+	width: 139px;
+	text-align: right;
+	padding-right: 20px;
+}
+
+	.cart-item-right .quantity {
+		text-align: right;
+		vertical-align: middle;
+		font-size: 16px;
+		line-height: 28px;
+		color: #212121;
+	}
+
+.next-number-picker {
+	color: #212121;
+	font-family: Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,Sans-serif;
+	font-size: 14px;
+	line-height: 1.28571;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+}
+
+.next-number-picker-inline .next-number-picker-handler-wrap {
+	width: 108px;
+	margin-left: 0;
+}
+
+.next-number-picker-inline .next-number-picker-handler-wrap, .next-number-picker-inline .next-number-picker-input-wrap {
+	position: relative;
+	float: left;
+}
+
+	.next-number-picker-inline .next-number-picker-handler-wrap .next-number-picker-handler-up {
+		float: right;
+	}
+
+	.next-number-picker-inline .next-number-picker-handler-wrap .next-number-picker-handler {
+		width: 32px;
+		height: 32px;
+		border-radius: 0;
+		margin: 0;
+	}
+
+.cart-item-number-picker.-down-disabled .next-number-picker-handler-down, .cart-item-number-picker.-up-disabled .next-number-picker-handler-up, .cart-item-number-picker .next-number-picker-handler-down-disabled, .cart-item-number-picker .next-number-picker-handler-up-disabled {
+	color: #dadada;
+	background-color: #fafafa;
+}
+
+.next-number-picker-inline .next-number-picker-handler-wrap .next-number-picker-handler {
+	width: 32px;
+	height: 32px;
+	border-radius: 0;
+	margin: 0;
+}
+
+.next-number-picker-handler-wrap .next-number-picker-handler-down-disabled, .next-number-picker-handler-wrap .next-number-picker-handler-down-disabled:hover, .next-number-picker-handler-wrap .next-number-picker-handler-up-disabled, .next-number-picker-handler-wrap .next-number-picker-handler-up-disabled:hover {
+	color: #9e9e9e;
+	background-color: #fafafa;
+	border-color: transparent;
+	cursor: default;
+}
+
+.next-number-picker-handler-wrap .next-number-picker-handler {
+	text-align: center;
+	cursor: pointer;
+	line-height: 0;
+	box-sizing: border-box;
+	overflow: hidden;
+	position: relative;
+	transition: all .2s;
+	display: block;
+	border: 4px solid transparent;
+	color: #9e9e9e;
+	background-color: #eff0f5;
+}
+
+.next-number-picker-inline .next-number-picker-handler-wrap .next-number-picker-handler-down-inner, .next-number-picker-inline .next-number-picker-handler-wrap .next-number-picker-handler-up-inner {
+	line-height: 24px;
+}
+
+.next-number-picker-handler-down-inner, .next-number-picker-handler-up-inner {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: pointer;
+	display: block;
+	transition: line-height .2s;
+	line-height: 11px;
+}
+
+.next-icon {
+	position: relative;
+	display: inline-block;
+	font-family: NextIcon;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.1px;
+	-moz-osx-font-smoothing: grayscale;
+}
+

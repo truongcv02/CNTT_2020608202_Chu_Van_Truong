@@ -1,0 +1,50 @@
+﻿@model QLXe.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Tài khoản</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KhachHang.Ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhachHang.Ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Khoa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Khoa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayLap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayLap)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Trở lại", "Index")
+</p>

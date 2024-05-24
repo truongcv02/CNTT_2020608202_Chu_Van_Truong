@@ -1,0 +1,63 @@
+﻿@model IEnumerable<QLXe.Models.DanhMuc>
+@{
+    ViewBag.Title = "Specials";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="mian">
+   
+    <div class="content-top">
+        <div class="sellers">
+            <h4><span>Toàn bộ sản phẩm</span></h4>
+        </div>
+        <div class="section group">
+            @foreach (var item in Model)
+            {
+                <div class="content-top">
+                    <div class="sellers">
+                        <h4><span>@item.TenDanhMuc</span></h4>
+                    </div>
+                    <div class="section group">
+                        @foreach (var item2 in item.SanPham.ToList())
+                        {
+                            <div class="col_1_of_4 span_1_of_4" style="margin-left: 0px; margin-right:1.2%">
+                                <div class="product-desc">
+                                    @{
+                                        var anhPhai = item2.HinhAnh.FirstOrDefault(h => h.ID_SanPham == item2.ID)?.AnhPhai;
+                                        string ImagePath = "~/wwwroot/Images/" + anhPhai ?? "no_image.jpg";
+                                    }
+                                    <img src="@Url.Content(ImagePath)" alt="" />
+
+                                    <h4 style="height: 100px;">@Html.DisplayFor(modelItem => item2.TenXe)</h4>
+                                </div>
+                                <div class="prod-inner">
+                                    <span class="price"><del>@string.Format("{0:N0} VND", item2.GiaBan)</del></span>
+                                    <span class="price">@string.Format("{0:N0} VND", item2.GiaBan * (100 - item2.KhuyenMai.PhanTramGiamGia) / 100)</span>
+                                    <a href="@Url.Action("ChiTietSanPham","SanPhams",new { id = item2.ID })" class="button" rel="nofollow">Xem chi tiết</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        }
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            }
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="content-bottom">
+        <div style="width:30%; padding-left:35%">
+            <div class="banner-wrap bottom_banner">
+                <a href="#" class="main_link">
+                    <figure><img src="images/phone.png" alt=""></figure><h5 style="text-align:center">Đặt mua online xác nhận qua số điện thoại<br><span>094 491 95 35</span></h5><p>
+                        Thời gian: 8am-11pm từ thứ 2- thứ 7 hằng tuần<br>
+                    </p>
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+

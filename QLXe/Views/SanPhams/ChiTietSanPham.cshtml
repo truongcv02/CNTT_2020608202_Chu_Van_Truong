@@ -1,0 +1,268 @@
+﻿@model QLXe.Models.SanPham
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Free Motor-Cycle Website Template | Single :: w3layouts</title>
+    <link href="/Assets/client/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="/Assets/client/js/jquery-1.7.2.min.js"></script>
+    <link rel="stylesheet" href="/Assets/client/css/global.css">
+    <script src="/Assets/client/js/slides.min.jquery.js"></script>
+    <script>
+        $(function () {
+            $('#products').slides({
+                preload: true,
+                preloadImage: 'img/loading.gif',
+                effect: 'slide, fade',
+                crossfade: true,
+                slideSpeed: 350,
+                fadeSpeed: 500,
+                generateNextPrev: true,
+                generatePagination: false
+            });
+        });
+    </script>
+    <style>
+        .j7HL5Q {
+            flex-basis: 515px;
+            flex-wrap: wrap;
+            margin-top: -8px;
+            max-height: 220px;
+            max-width: 515px;
+            overflow-y: auto;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .flex, .h-center {
+            display: flex;
+        }
+
+        .SkhBL1 {
+            padding-left: 2.5rem;
+        }
+
+        .sApkZm {
+            align-items: center;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,.09);
+            border-radius: 2px;
+            box-sizing: border-box;
+            color: rgba(0,0,0,.8);
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            margin: 8px 8px 0px 0px;
+            min-height: 2.5rem;
+            min-width: 10rem;
+            outline: 0;
+            overflow: visible;
+            padding: 16px;
+            position: relative;
+            text-align: left;
+            word-break: break-word;
+        }
+
+        .nk0Z0T {
+            height: 4rem;
+            left: 0.3rem;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5rem;
+        }
+
+        img {
+            border: 0;
+        }
+
+        button, select {
+            text-transform: none;
+        }
+
+        .colorName {
+            margin-left: 70px; /* Khoảng cách giữa ảnh và tên màu */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="mian">
+        <div class="single">
+            <div class="grid_24">
+                <div class="single-head">
+                    &nbsp;&nbsp;<a href="@Url.Action("Index","Home")" class="headerNavigation">Trang chủ</a> |
+                    <i class="#"></i> <a href="@Url.Action("TheoDanhMuc1","SanPhams",new { id = Model.DanhMuc.DanhMuc2.ID})" class="headerNavigation">@Model.DanhMuc.DanhMuc2.TenDanhMuc</a> |
+                    <i class="#"></i> <a href="@Url.Action("TheoDanhMuc2","SanPhams",new { id =Model.DanhMuc.ID })" class="headerNavigation">@Model.DanhMuc.TenDanhMuc</a> |
+                    <i class="#"></i> <a href="#" class="headerNavigation last">@Model.TenXe</a>
+                </div>
+            </div>
+            @{
+                var anhPhai = Model.HinhAnh.FirstOrDefault(h => h.ID_SanPham == Model.ID)?.AnhPhai;
+                string ImagePath0 = "~/wwwroot/Images/" + anhPhai ?? "no_image.jpg";
+                var anhTruoc = Model.HinhAnh.FirstOrDefault(h => h.ID_SanPham == Model.ID)?.AnhTruoc;
+                string ImagePath1 = "~/wwwroot/Images/" + anhTruoc ?? "no_image.jpg";
+                var anhTrai = Model.HinhAnh.FirstOrDefault(h => h.ID_SanPham == Model.ID)?.AnhTrai;
+                string ImagePath2 = "~/wwwroot/Images/" + anhTrai ?? "no_image.jpg";
+                var anhSau = Model.HinhAnh.FirstOrDefault(h => h.ID_SanPham == Model.ID)?.AnhSau;
+                string ImagePath3 = "~/wwwroot/Images/" + anhSau ?? "no_image.jpg";
+            }
+            <div class="content span_1_of_2">
+                <div class="grid images_3_of_2">
+                    <div class="slidebar span_1_of_s">
+                        <!-- <img src="images/pic12.jpg" alt=""/>-->
+                        <div id="container">
+                            <div id="products_example">
+                                <div id="products">
+                                    <div class="slides_container" style="height:280px">
+                                        <a href="#" ><img src="@Url.Content(ImagePath0)" alt=" " /></a>
+                                        <a href="#" ><img src="@Url.Content(ImagePath1)" alt=" " /></a>
+                                        <a href="#" ><img src="@Url.Content(ImagePath2)" alt=" " /></a>
+                                        <a href="#" ><img src="@Url.Content(ImagePath3)" alt=" " /></a>
+                                    </div>
+                                    <ul class="pagination" >
+                                        <li><a href="#"><img src="@Url.Content(ImagePath0)" alt=" " /></a></li>
+                                        <li><a href="#"><img src="@Url.Content(ImagePath1)" alt=" " /></a></li>
+                                        <li><a href="#"><img src="@Url.Content(ImagePath2)" alt=" " /></a></li>
+                                        <li><a href="#"><img src="@Url.Content(ImagePath3)" alt=" " /></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="desc span_3_of_2">
+                    <h3>@Model.TenXe<span class="smallText"></span></h3>
+                    <div class="options">
+                        <p class="options-title">Lựa chọn sản phẩm:</p>
+                        <ul class="ofh">
+                            <li class="first">
+                                <label>Màu sắc:</label>
+                                <div class="flex items-center j7HL5Q">
+                                    @foreach (var option in ViewBag.tenMauArray)
+                                    {
+                                        var sanPham = Model.DanhMuc.SanPham.ToList();
+                                        if (sanPham != null)
+                                        {
+                                            foreach (var item in sanPham)
+                                            {
+                                                if (item.MauSac.TenMau == option)
+                                                {
+                                                    var anhh = item.HinhAnh.FirstOrDefault(h => h.ID_SanPham == item.ID)?.AnhPhai;
+                                                    var imageSource = "~/wwwroot/Images/" + (anhh ?? "no_image.jpg");
+                                                    <a href="@Url.Action("ChiTietSanPham","SanPhams",new { id = item.ID })" class="sApkZm SkhBL1" aria-label="[18-4-5] Cạnh Vuông" aria-disabled="false" fdprocessedid="taqzmi">
+                                                        <img class="nk0Z0T" src="@Url.Content(imageSource)">
+                                                        <span class="colorName">@option</span>
+                                                    </a>
+                                                }
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </li>
+                            <li class="last">
+                                <label for="quantity">Số lượng:</label>
+                                <div class="quantity">
+                                    <input type="number" id="quantity" name="quantity" value="1" min="1">
+                                    <button class="increase" onclick="increaseQuantity()">+</button>
+                                    <button class="decrease" onclick="decreaseQuantity()">-</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <h2 class="price">
+                        <b>Giá bán:&nbsp;&nbsp;</b><br />
+                        <span class="price"><del>@string.Format("{0:N0} VND", Model.GiaBan)</del></span> <br />
+                        <span class="price">@string.Format("{0:N0} VND", Model.GiaBan * (100 - Model.KhuyenMai.PhanTramGiamGia) / 100)</span>
+                    </h2>
+                    <input type="submit" value="Thêm vào giỏ hàng" class="button1" onclick="addToCart()">
+                    <div class="clear"></div>
+                    <div class="rating">
+                        <span class="vote">
+                            <br />
+                            <br />
+                        </span>
+                    </div>
+                </div>
+                
+                <br />
+                <div class="tab-heading">
+                    Thông tin sản phẩm
+                </div>
+                <p class="para">@Model.ThongSo</p>
+            </div>
+            <div class="rightsidebar span_3_of_1">
+                <div class="blog-bottom">
+                    <h4>Các sản phẩm @Model.DanhMuc.DanhMuc2.TenDanhMuc khác</h4>
+                    <div class="about-team">
+                        @{
+                            var dsDanhMuc = Model.DanhMuc.DanhMuc2.DanhMuc1.ToList();
+                            foreach (var item in dsDanhMuc)
+                            {
+                                var sanPhamS1 = item.SanPham.FirstOrDefault();
+                                var anhh = sanPhamS1.HinhAnh.FirstOrDefault(h => h.ID_SanPham == sanPhamS1.ID)?.AnhPhai;
+                                var imageSource = "~/wwwroot/Images/" + (anhh ?? "no_image.jpg");
+                                <div class="client">
+                                    <div class="about-team-left">
+                                        <a href="@Url.Action("ChiTietSanPham","SanPhams",new { id = sanPhamS1.ID })"><img src="@Url.Content(imageSource)" title="client-name"></a>
+                                    </div>
+                                    <div class="about-team-right">
+                                        <p>@item.TenDanhMuc</p>
+                                    </div>
+                                    <div class="clear"> </div>
+                                </div>
+                            }
+
+                        }
+
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function increaseQuantity() {
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    }
+
+    function decreaseQuantity() {
+        var quantityInput = document.getElementById('quantity');
+        var currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    }
+    function addToCart() {
+    var quantityInput = document.getElementById('quantity');
+    var quantity = parseInt(quantityInput.value);
+
+    // Gọi hành động AddToCart trên server và chuyển hướng về trang chi tiết sản phẩm
+    var sanPhamId = '@Model.ID';
+    var url = '@Url.Action("AddToCart", "SanPhams")?sanPhamId=' + sanPhamId + '&soLuong=' + quantity;
+    window.location.href = url;
+    }
+    function showNotification(message) {
+        alert(message); // Hiển thị cửa sổ thông báo
+    }
+    window.onload = function() {
+            var message = "@Html.Raw(TempData["Message"])"; // Sử dụng Html.Raw để tránh mã HTML bị mã hóa
+            if (message !== "") {
+                alert(message); // Hiển thị cửa sổ thông báo
+            }
+        };
+</script>

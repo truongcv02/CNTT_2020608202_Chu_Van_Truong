@@ -1,0 +1,29 @@
+﻿@model IEnumerable<QLXe.Models.SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <div class="col_1_of_4 span_1_of_4" style="margin-left: 0px; margin-right:1.2%">
+        <div class="product-desc" style="height: 350px">
+            @{
+                var anhPhai = item.HinhAnh.FirstOrDefault(h => h.ID_SanPham == item.ID)?.AnhPhai;
+                string ImagePath = "~/wwwroot/Images/" + anhPhai ?? "no_image.jpg";
+            }
+            <img src="@Url.Content(ImagePath)" alt="" />
+
+            <h4 style="height: 100px;">@Html.DisplayFor(modelItem => item.TenXe)</h4>
+        </div>
+        <div class="prod-inner" style="height:100px">
+            <span class="price"><del>@string.Format("{0:N0} VND", item.GiaBan)</del></span>
+            <span class="price">@string.Format("{0:N0} VND", item.GiaBan * (100 - item.KhuyenMai.PhanTramGiamGia) / 100)</span>
+            <a href="@Url.Action("ChiTietSanPham","SanPhams",new { id = item.ID })" class="button" rel="nofollow">Xem chi tiết</a>
+            <div class="clear"></div>
+        </div>
+    </div>
+    
+}
+<div class="clear"></div>
+

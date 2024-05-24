@@ -1,0 +1,90 @@
+﻿@model QLXe.Models.SanPham
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Sản phẩm</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DanhMuc.TenDanhMuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DanhMuc.TenDanhMuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KhuyenMai.TenKhuyenMai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhuyenMai.TenKhuyenMai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MauSac.TenMau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MauSac.TenMau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenXe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenXe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NamSX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamSX)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThongSo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThongSo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaNhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Trở lại", "Index")
+</p>

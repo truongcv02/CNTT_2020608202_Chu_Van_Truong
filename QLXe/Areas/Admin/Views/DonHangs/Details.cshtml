@@ -1,0 +1,109 @@
+﻿@model QLXe.Models.DonHang
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết đơn hàng</h2>
+
+<div>
+    <h4>Đơn hàng</h4>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KhachHang.Ten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayDat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayGiaoHang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChiGiaoHang)
+            <th>
+                @Html.DisplayNameFor(model => model.TongGiaTri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SDT)
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.KhachHang.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.NgayDat)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.NgayGiaoHang)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.DiaChiGiaoHang)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.TongGiaTri)
+            </td>
+            <td>
+                @{
+                    string tinhTrangText = "";
+                    switch (Model.TinhTrang)
+                    {
+                        case 1:
+                            tinhTrangText = "Chờ xác nhận";
+                            break;
+                        case 2:
+                            tinhTrangText = "Đã xác nhận";
+                            break;
+                        case 3:
+                            tinhTrangText = "Hoàn thành";
+                            break;
+                        case 4:
+                            tinhTrangText = "Đã hủy";
+                            break;
+                        case 5:
+                            tinhTrangText = "Chưa cọc";
+                            break;
+                        case 6:
+                            tinhTrangText = "Đã cọc";
+                            break;
+                        default:
+                            tinhTrangText = "Không xác định";
+                            break;
+                    }
+                }
+                @Html.DisplayFor(model => tinhTrangText)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.SDT)
+            </td>
+        </tr>
+    </table>
+    <h4>Sản phẩm có trong đơn hàng</h4>
+    <table class="table">
+        <tr>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Giá bán</th>
+            <!--Thêm các cột khác nếu cần-->
+        </tr>
+        @foreach (var item in Model.ChiTietDonHang)
+        {
+            <tr>
+                <td>@item.SanPham.TenXe</td>
+                <td>@item.SoLuong</td>
+                <td>@item.SanPham.GiaBan</td>
+                <!--Thêm các ô khác nếu cần-->
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Trở lại", "Index")
+</p>

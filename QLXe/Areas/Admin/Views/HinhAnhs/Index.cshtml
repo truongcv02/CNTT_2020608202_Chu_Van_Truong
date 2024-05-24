@@ -1,0 +1,82 @@
+﻿@model PagedList.IPagedList<QLXe.Models.HinhAnh>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<h2>Danh sách hình ảnh</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        Tìm kiếm: @Html.TextBox("SearchString", ViewBag.currentFilter as string)
+        <button type="submit" style="border: none"><i class="mdi mdi-magnify fs-4"></i></button>
+    </div>
+}
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Tên Xe", "Index", new { sortOrder = ViewBag.SapXepTheoTen, currentFilter = ViewBag.currentFilter })
+        </th>
+        <th>
+            Ảnh phía trước
+        </th>
+        <th>
+            Ảnh bên trái
+        </th>
+        <th>
+            Ảnh phía sau
+        </th>
+        <th>
+            Ảnh bên phải
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SanPham.TenXe)
+            </td>
+            <td>
+                @{
+                    string ImagePath0 = "~/wwwroot/Images/" + Html.DisplayFor(modelItem => item.AnhTruoc);
+                }
+                <img src="@Url.Content(ImagePath0)" width="100" />
+            </td>
+            <td>
+                @{
+                    string ImagePath1 = "~/wwwroot/Images/" + Html.DisplayFor(modelItem => item.AnhTrai);
+                }
+                <img src="@Url.Content(ImagePath1)" width="100" />
+            </td>
+            <td>
+                @{
+                    string ImagePath2 = "~/wwwroot/Images/" + Html.DisplayFor(modelItem => item.AnhSau);
+                }
+                <img src="@Url.Content(ImagePath2)" width="100" />
+            </td>
+            <td>
+                @{
+                    string ImagePath3 = "~/wwwroot/Images/" + Html.DisplayFor(modelItem => item.AnhPhai);
+                }
+                <img src="@Url.Content(ImagePath3)" width="100" />
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-info btn-sm" })
+                @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.currentFilter }))
+

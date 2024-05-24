@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main">
+    <div class="single">
+        <div class="section group">
+            <div class="map">
+                <iframe width="100%" height="175" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227347.43794472655!2d103.86585411013561!3d19.389299419079595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31305d4870d40d1d%3A0x7c870ae6dd810f3d!2zWGUgbcOheSBIxrBuZyBIw6A!5e0!3m2!1svi!2s!4v1713119177244!5m2!1svi!2s"></iframe>
+                <br>
+                <small><a href="https://maps.app.goo.gl/ReMLdRXHTBrMp7ES9" style="color:#666;text-align:left;font-size:12px">View Larger Map</a></small>
+            </div>
+            <div class="col span_2_of_3">
+                <div class="contact-form">
+                    <h3>Contact Us</h3>
+                    <form method="post" action="contact-post.html">
+                        <div>
+                            <span><label>Tiêu đề</label></span>
+                            <span><input id="TieuDe" name="TieuDe" type="text" class="textbox"></span>
+                        </div>
+                        <div>
+                            <span><label>Email của bạn</label></span>
+                            <span><input id="Email" name="Email" type="text" class="textbox"></span>
+                        </div>
+                        <div>
+                            <span><label>Nội dung</label></span>
+                            <span><textarea id="NoiDung" name="NoiDung"></textarea></span>
+                        </div>
+                        <button type="button" id="btnGui" style="width: 100px; height: 40px; background-color: cornflowerblue; border: none">Gửi</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col span_1_of_3">
+                <div class="company_address">
+                    <h3>Thông tin của hàng :</h3>
+                    <p>Hưng Hà town,</p>
+                    <p>Diễn Châu, Nghệ An · Nghi Lộc, Nghệ An,</p>
+                    <p>VietNam</p>
+                    <p>Phone:094 491 95 35</p>
+                    <p>Email: <span>hunghahoahuong@gmail.com</span></p>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#btnGui').click(function (event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của button
+            var tieude = $('#TieuDe').val();
+            var noidung = $('#NoiDung').val();
+            var Email = $('#Email').val();
+            // Tạo URL sử dụng Url.Action và truyền vào mảng các Id_SanPham
+            var url = '@Url.Action("SendMail", "Home")' + '?TieuDe=' + encodeURIComponent(tieude) + '&Email=' + encodeURIComponent(Email) + '&NoiDung=' + encodeURIComponent(noidung);
+            // Chuyển hướng đến URL được tạo
+            window.location.href = url;
+        });
+        @if (TempData["sendmail"] != null)
+        {
+            <text>
+                alert("@Html.Raw(TempData["sendmail"])");
+            </text>
+            // Reset ViewBag.TaoTaiKhoan để không hiển thị lại khi tải lại trang
+            TempData["sendmail"] = null;
+        }
+    });
+
+</script>

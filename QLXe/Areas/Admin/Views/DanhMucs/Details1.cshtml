@@ -1,0 +1,27 @@
+﻿@model QLXe.Models.DanhMuc
+@{
+    ViewBag.Title = "Details1";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Chi tiết danh mục cấp 1</h2>
+
+<div>
+    <h4>DanhMuc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDanhMuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDanhMuc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit1", new { id = Model.ID }) |
+    @Html.ActionLink("Trở lại", "Index")
+</p>

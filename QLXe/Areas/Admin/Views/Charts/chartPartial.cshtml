@@ -1,0 +1,66 @@
+﻿@{
+    Layout = null; // Không sử dụng Layout cho Partial View
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<body>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="myChart" width="800" height="380"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dữ liệu nhập hàng của từng tháng từ Controller
+        var inputSales = @Html.Raw(Json.Encode(ViewBag.TotalImportByMonth));
+        // Dữ liệu bán hàng của từng tháng từ Controller
+        var outputSales = @Html.Raw(Json.Encode(ViewBag.TotalSaleByMonth));
+
+        // Lấy danh sách tháng và năm
+        var months = [];
+        var currentDate = new Date();
+        for (var i = 5; i >= 0; i--) {
+            var month = currentDate.getMonth() - i;
+            var year = currentDate.getFullYear();
+            if (month < 0) {
+                month += 12;
+                year -= 1;
+            }
+            months.push((month + 1) + "/" + year); // Tháng bắt đầu từ 0 nên cần cộng thêm 1
+        }
+
+        // Tạo biểu đồ
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: months, // Sử dụng danh sách tháng và năm
+                datasets: [{
+                    label: 'Tổng giá trị nhập hàng',
+                    data: inputSales, // Sử dụng mảng dữ liệu nhập hàng từ Controller
+                    backgroundColor: 'rgb(238,121,81)', // Màu sắc cho dữ liệu nhập hàng
+                    borderColor: 'rgb(238,121,81)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Tổng giá trị bán hàng',
+                    data: outputSales, // Sử dụng mảng dữ liệu bán hàng từ Controller
+                    backgroundColor: 'rgb(79,185,240)', // Màu sắc cho dữ liệu bán hàng
+                    borderColor: 'rgb(79,185,240)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>

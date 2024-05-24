@@ -1,0 +1,52 @@
+﻿@model PagedList.IPagedList<QLXe.Models.KhuyenMai>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách khuyến mãi</h2>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@using (Html.BeginForm())
+{
+    <div>
+        Tìm kiếm: @Html.TextBox("SearchString", ViewBag.currentFilter as string)
+        <button type="submit" style="border: none"><i class="mdi mdi-magnify fs-4"></i></button>
+    </div>
+}
+<p>
+    @Html.ActionLink("tạo mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên khuyến mãi
+        </th>
+        <th>
+            Phần trăm giảm
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhuyenMai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhanTramGiamGia)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @class = "btn btn-info btn-sm" })
+                @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/ @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.currentFilter }))

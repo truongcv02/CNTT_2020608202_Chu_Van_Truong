@@ -1,0 +1,217 @@
+﻿@model IEnumerable<QLXe.Models.DanhMuc>
+
+<style>
+    .navigation-bottom__item {
+        line-height: 1;
+        position: relative;
+    }
+
+    ul li, ol li {
+        list-style-type: none;
+    }
+
+    .navigation-bottom__link {
+        position: relative;
+        padding: 0 2rem;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #000000;
+        text-transform: uppercase;
+        -webkit-transition: opacity .3s;
+        transition: opacity .3s;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a, label {
+        cursor: pointer;
+    }
+
+    .submenu.submenu-product {
+        width: 1100px;
+    }
+
+    .submenu {
+        display: none;
+        position: absolute;
+        left: calc(50% - 350px);
+        padding-top: 2rem;
+        overflow: hidden;
+        z-index: 1000;
+        opacity: 0;
+    }
+
+    body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+        margin: 0;
+        padding: 0;
+    }
+
+    .submenu-list {
+        display: flex;
+        margin: 0 -0.5rem;
+        padding: 1rem;
+        background-color: rgba(255,255,255,0.9);
+    }
+
+    .submenu-item {
+        padding: 0 0.5rem;
+        width: 33.3333%;
+    }
+
+    ul li, ol li {
+        list-style-type: none;
+    }
+
+    .submenu-item__inner {
+        background-color: #fff;
+        box-shadow: 5px 5px 15px #ccc;
+        padding: 0 2rem 1rem;
+        height: 100%;
+    }
+
+    body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+        margin: 0;
+    }
+
+    .submenu-item__title {
+        text-align: center;
+        font-size: 2rem;
+        padding-top: 2rem;
+    }
+    a {
+        text-decoration: none;
+    }
+
+    a, label {
+        cursor: pointer;
+    }
+    body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+        margin: 0;
+        padding: 0;
+    }
+
+    .submenu-item__row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 0 -2rem;
+    }
+    body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+        padding: 0;
+    }
+    .submenu-item__col {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+        margin: 0;
+    }
+    .submenu-item__link {
+        display: block;
+        font-size: 1.6rem;
+        color: #000;
+        text-align: center;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a, label {
+        cursor: pointer;
+    }
+    .submenu-item__link picture {
+        display: block;
+        position: relative;
+        padding-top: 80%;
+    }
+    .submenu-item__link picture img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        object-fit: contain;
+    }
+
+    .submenu-item__link img {
+        max-height: 95px;
+        margin-bottom: 1rem;
+        transform-origin: center center;
+    }
+
+    img{
+        vertical-align: middle;
+        margin: 0;
+        padding: 0;
+    }
+
+    img, abbr, acronym, fieldset {
+        border: 0;
+    }
+    *, *::after, *::before {
+        padding: 0;
+        margin: 0;
+    }
+    .navigation-bottom__item.sub:hover .submenu {
+        display: block;
+        opacity: 1;
+
+    }
+</style>
+<div class="menu">
+    <ul>
+        <li class="active"><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+        <li><a href="@Url.Action("About","Home")">Về chúng tôi</a></li>
+        <li><a class="navigation-bottom__link" href="@Url.Action("Index","SanPhams")">Sản phẩm</a></li>
+        <li class="navigation-bottom__item sub">
+            <a class="navigation-bottom__link" href="#">Danh mục</a>
+            <div class="submenu submenu-product" style="border:none">
+                <ul class="submenu-list" style="border:none">
+                    @foreach (var item in Model)
+                    {
+                        if (item.ID_DanhMuc == null)
+                        {
+                            <li class="submenu-item">
+                                <div class="submenu-item__inner">
+                                    <p class="submenu-item__title">
+                                        <a href="@Url.Action("TheoDanhMuc1","SanPhams",new { id =item.ID })" style="color: #000;border:none">@item.TenDanhMuc</a>
+                                    </p>
+                                    <div class="submenu-item__row" >
+                                        @foreach (var item2 in Model)
+                                        {
+                                            if (item2.ID_DanhMuc == item.ID)
+                                            {
+                                                <div class="submenu-item__col">
+                                                    
+                                                    <a href="@Url.Action("TheoDanhMuc2","SanPhams",new { id =item2.ID })" class="submenu-item__link" style="border:none">
+                                                        @{
+                                                            var sk = item2.SanPham.FirstOrDefault(s => s.ID_DanhMuc == item2.ID);
+                                                            string ImagePath ="~/wwwroot/Images/"+ item2.SanPham.FirstOrDefault(s => s.ID_DanhMuc == item2.ID)?.HinhAnh.FirstOrDefault(ha => ha.ID_SanPham == sk.ID)?.AnhPhai;
+                                                        }
+                                                        <img class="notLazy webpexpress-processed" src="@Url.Content(ImagePath)">
+                                                        <span class="submenu-item__name" style="color: black;">@item2.TenDanhMuc</span>
+                                                    </a>
+                                                </div>     
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+
+                </ul>
+            </div>
+        </li>
+        <li><a href="@Url.Action("Contact","Home")">Liên hệ</a></li>
+    </ul>
+</div>
+
+
+
+
+

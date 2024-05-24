@@ -1,0 +1,38 @@
+﻿@model QLXe.Models.Slide
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Slide</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SanPham.TenXe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SanPham.TenXe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slide1)
+        </dt>
+
+        <dd>
+            @{
+                string ImagePath3 = "~/wwwroot/Images/" + Model.Slide1;
+            }
+            <img src="@Url.Content(ImagePath3)" width="100" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Trở lại", "Index")
+</p>
