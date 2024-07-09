@@ -4,13 +4,16 @@
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
+@if (ViewBag.er != null)
+{
+    <p style="color: red">@ViewBag.er</p>
+}
 <h2>Tạo mới</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Sản phẩm</h4>
         <hr />

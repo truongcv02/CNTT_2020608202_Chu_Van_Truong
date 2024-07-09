@@ -91,6 +91,9 @@ namespace QLXe.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var result = db.SanPham.Where(s => s.TenXe == sanPham.TenXe);
+
+                          
                 db.SanPham.Add(sanPham);
                 db.SaveChanges();
                 return RedirectToAction("Index");

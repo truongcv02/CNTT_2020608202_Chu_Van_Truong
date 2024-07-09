@@ -69,7 +69,7 @@
 
                         <h4 style="height: 100px;">@Html.DisplayFor(modelItem => item2.TenXe)</h4>
                     </div>
-                    <div class="prod-inner">
+                    <div class="prod-inner" style="height: 100px;">
                         <span class="price"><del>@string.Format("{0:N0} VND", item2.GiaBan)</del></span>
                         <span class="price">@string.Format("{0:N0} VND", item2.GiaBan * (100 - item2.KhuyenMai.PhanTramGiamGia) / 100)</span>
                         <a href="@Url.Action("ChiTietSanPham","SanPhams",new { id = item2.ID })" class="button" rel="nofollow">Xem chi tiết</a>

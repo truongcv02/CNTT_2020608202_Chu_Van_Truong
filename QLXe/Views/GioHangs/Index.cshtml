@@ -76,13 +76,14 @@
             </tr>
         </thead>
         @ViewBag.ID_KhachHang
-        <tbody>
-            @{
-                int p = 0;
-            }
-            @foreach (var item in Model)
+    <tbody>
+        @{
+            int p = 0;
+        }
+        @foreach (var item in Model)
+        {
+            if (item.SoLuong <= item.SanPham.SoLuong && item.SanPham.SoLuong != 0)
             {
-               
                 p++;
                 ViewBag.ID_KhachHang = item.ID_KhachHang;
                 <tr>
@@ -101,7 +102,7 @@
                         </div>
                     </td>
                     @{
-                        double? thanhTien = double.Parse(item.SanPham.GiaBan.ToString()) * (1- double.Parse(item.SanPham.KhuyenMai.PhanTramGiamGia.ToString())/100) * double.Parse(item.SoLuong.ToString());
+                        double? thanhTien = double.Parse(item.SanPham.GiaBan.ToString()) * (1 - double.Parse(item.SanPham.KhuyenMai.PhanTramGiamGia.ToString()) / 100) * double.Parse(item.SoLuong.ToString());
                     }
                     <td class="thanh-tien">@thanhTien.Value.ToString("N0") VNĐ</td>
                     @{
@@ -111,7 +112,41 @@
                     <td><img src="@Url.Content(ImagePath)" alt="@item.SanPham.TenXe" style="max-width: 100px; max-height: 100px;" /></td>
                 </tr>
             }
-        </tbody>
+            else
+            {
+                if (item.SoLuong >= item.SanPham.SoLuong)
+                {
+                    p++;
+                    ViewBag.ID_KhachHang = item.ID_KhachHang;
+                    <tr>
+                        <td>
+                            <!-- Thêm ô chọn cho mỗi sản phẩm -->
+                            <input type="checkbox" class="product-checkbox" data-idsp="@item.ID_SanPham" data-id="@item.ID" data-price="@item.SanPham.GiaBan*@item.SoLuong" checked>
+                        </td>
+                        <td>@item.SanPham.TenXe</td>
+                        <td>@item.SanPham.GiaBan.Value.ToString("N0") VNĐ</td>
+                        <td>@string.Format("{0:N0} VND", item.SanPham.GiaBan * (100 - item.SanPham.KhuyenMai.PhanTramGiamGia) / 100)</td>
+                        <td>
+                            <div class="input-group">
+                                <button class="btn-active btn-outline-secondary decrease" type="button" data-id="@item.ID">-</button>
+                                <input style="width: 20px" type="text" id="quantity-input-@item.ID" class="form-control quantity-input" value="@item.SanPham.SoLuong" disabled>
+                                <button class="btn-active btn btn-outline-secondary increase" type="button" data-id="@item.ID">+</button>
+                            </div>
+                        </td>
+                        @{
+                            double? thanhTien = double.Parse(item.SanPham.GiaBan.ToString()) * (1 - double.Parse(item.SanPham.KhuyenMai.PhanTramGiamGia.ToString()) / 100) * double.Parse(item.SoLuong.ToString());
+                        }
+                        <td class="thanh-tien">@thanhTien.Value.ToString("N0") VNĐ</td>
+                        @{
+                            var anhPhai = item.SanPham.HinhAnh.FirstOrDefault(h => h.ID_SanPham == item.ID_SanPham)?.AnhPhai;
+                            string ImagePath = "~/wwwroot/Images/" + anhPhai;
+                        }
+                        <td><img src="@Url.Content(ImagePath)" alt="@item.SanPham.TenXe" style="max-width: 100px; max-height: 100px;" /></td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
         @if (p != 0)
         {
             <tfoot>
@@ -224,7 +259,6 @@
         });
         $('#btnThanhToan').click(function () {
             var idSanPhamArray = [];
-
             // Lặp qua mỗi ô chọn
             $('.product-checkbox').each(function () {
                 if ($(this).is(':checked')) { // Kiểm tra nếu ô chọn được chọn
@@ -232,7 +266,6 @@
                     idSanPhamArray.push(idSanPham);
                 }
             });
-
             // Tạo URL sử dụng Url.Action và truyền vào mảng các Id_SanPham
             var url = '@Url.Action("Index2", "GioHangs")' + '?ids=' + idSanPhamArray.join(',');
 

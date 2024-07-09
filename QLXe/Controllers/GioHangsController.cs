@@ -23,7 +23,14 @@ namespace QLXe.Controllers
             }
             // Lấy ra danh sách sản phẩm trong giỏ hàng của khách hàng có ID là id
             var gioHang = db.GioHang.Where(g => g.ID_KhachHang == id).Include(g => g.KhachHang).Include(g => g.SanPham);
-
+            foreach(var item in gioHang.ToList())
+			{
+                if(item.SoLuong > item.SanPham.SoLuong)
+				{
+                    item.SoLuong = item.SanPham.SoLuong;
+				}                    
+			}
+            db.SaveChanges();
             if (gioHang == null)
             {
                 return HttpNotFound();
